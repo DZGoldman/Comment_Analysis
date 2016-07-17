@@ -1,10 +1,14 @@
 class Api < ActiveRecord::Base
 
-
-  self.invalid_url = {
-      :success? => false,
-      :message => 'Those not both valid urls'
+  def self.error_message_json message
+    messages = {
+      :url => 'Invalid url(s). Try again'
     }
+    return {
+      :success? => false,
+      :message => messages[message]
+    }
+  end
 
   def self.get_comments (video_id)
     query = {
@@ -73,10 +77,10 @@ class Api < ActiveRecord::Base
 
   def self.extract_video_id(url)
     id = url.split('youtube.com/watch?v=').last
-    unless id.length == url.length
-      return id
-    else
+    if id.length == url.length or url.length==0
       return false
+    else
+      return id
     end
   end
 
