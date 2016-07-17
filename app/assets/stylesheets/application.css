@@ -13,3 +13,26 @@
  *= require_tree .
  *= require_self
  */
+
+ body {
+   font-family: sans-serif;
+ }
+
+.specific-video-analysis {
+  border: 1px solid black;
+  display: inline-block;
+  margin: 5px;
+  padding: 5px;
+}
+
+.main-category {
+
+}
+
+.sub-category {
+  /*border: 1px solid black;*/
+  display: inline-block;
+  width: 120px;
+  height: 120px;
+  font-size: 13px;
+}

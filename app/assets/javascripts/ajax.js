@@ -1,6 +1,4 @@
 $(function() {
-
-
   $('#submit').click(function() {
     var url1 = $('#video_link_1').val().trim();
     var url2 = $('#video_link_2').val().trim()
@@ -12,49 +10,52 @@ $(function() {
         url2: url2
       }
     }).done(function(data) {
-      console.log(data);
-      draw([1, 2, 3, 4, 5])
+      if(data.video_1_data.document_tone){
+        $('#container').empty();
+        draw(data)
+      } else {
+        $('#container').append($('<p>').text('Error Loading Visuals. Plase Select Other Videos to Analayze'));
+      }
     })
   })
 })
 
+function draw(data){
+  createIndividualVideoAnalysis(data.video_1_data,1);
+  createIndividualVideoAnalysis(data.video_2_data,2);
+}
 
-// Dummy function
-function draw(data) {
-  var color = d3.scale.category20b();
-  var width = 420,
-    barHeight = 20;
-
-  var x = d3.scale.linear()
-    .range([0, width])
-    .domain([0, d3.max(data)]);
-
-  var chart = d3.select("#graph")
-    .attr("width", width)
-    .attr("height", barHeight * data.length);
-
-  var bar = chart.selectAll("g")
-    .data(data)
-    .enter().append("g")
-    .attr("transform", function(d, i) {
-      return "translate(0," + i * barHeight + ")";
-    });
-
-  bar.append("rect")
-    .attr("width", x)
-    .attr("height", barHeight - 1)
-    .style("fill", function(d) {
-      return color(d)
+function createIndividualVideoAnalysis(specificVideoData, videoNum) {
+  var specificVideoContainer = $('<div>');
+  var specificVideoHeading = $('<h2>');
+  specificVideoHeading.text('Video ' + videoNum);
+  specificVideoContainer.append(specificVideoHeading);
+  specificVideoContainer.addClass('specific-video-analysis');
+  var toneCateogories = specificVideoData.document_tone.tone_categories;
+  toneCateogories.forEach(function (toneCategory, index) {
+    var toneCategoryContiner = $('<div>');
+    toneCategoryContiner.addClass('main-category');
+    var categoryNameClass = toneCategory.category_name.split(" ").join("-").toLowerCase();
+    toneCategoryContiner.addClass(categoryNameClass);
+    var toneCategoryHeading = $('<h3>');
+    toneCategoryHeading.text(toneCategory.category_name);
+    toneCategoryContiner.append(toneCategoryHeading);
+    specificVideoContainer.append(toneCategoryContiner);
+    $('#container').append(specificVideoContainer);
+    toneCategory.tones.forEach(function (tone, index2) {
+      var toneContainer = $('<div>');
+      var toneHeading = $('<h6>');
+      var toneScore = $('<h6>');
+      toneHeading.text(tone.tone_name);
+      toneScore.text(tone.score);
+      toneContainer.append(toneHeading);
+      toneContainer.append(toneScore);
+      toneContainer.addClass('sub-category');
+      toneContainer.css({
+        'background-color': 'rgba(255,0,200,'+ tone.score +')'
+      });
+      // NOTE: this selection is a bit hacky, but good enought for this phase
+      $('#container > div:nth-child(' + videoNum + ') > .' + categoryNameClass).append(toneContainer);
     })
-
-  bar.append("text")
-    .attr("x", function(d) {
-      return x(d) - 10;
-    })
-    .attr("y", barHeight / 2)
-    .attr("dy", ".35em")
-    .style("fill", "white")
-    .text(function(d) {
-      return d;
-    });
+  })
 }
