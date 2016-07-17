@@ -1,4 +1,11 @@
 class Api < ActiveRecord::Base
+
+
+  self.invalid_url = {
+      :success? => false,
+      :message => 'Those not both valid urls'
+    }
+
   def self.get_comments (video_id)
     query = {
       :query => {
@@ -26,12 +33,6 @@ class Api < ActiveRecord::Base
     }
     return HTTParty.get('https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone/', query)
 
-  end
-
-  def self.get_sentiment (str)
-    AlchemyAPI.key = Rails.application.secrets.alchemy_api_key
-    results = AlchemyAPI.search(:sentiment_analysis, text: str)
-    return results
   end
 
 
@@ -68,6 +69,15 @@ class Api < ActiveRecord::Base
     tone = Api.get_tone(str)
     print tone
     return stats.merge(tone)
+  end
+
+  def self.extract_video_id(url)
+    id = url.split('youtube.com/watch?v=').last
+    unless id.length == url.length
+      return id
+    else
+      return false
+    end
   end
 
 end
