@@ -1,5 +1,9 @@
 $(function() {
   $('#submit').click(function() {
+    var loadingIcon = $('<span>');
+    loadingIcon.addClass('fa fa-circle-o-notch fa-spin');
+    $('body').append(loadingIcon);
+    'fa fa-circle-o-notch fa-spin'
     var url1 = $('#video_link_1').val().trim();
     var url2 = $('#video_link_2').val().trim()
     $.ajax({
@@ -10,6 +14,7 @@ $(function() {
         url2: url2
       }
     }).done(function(data) {
+      loadingIcon.removeClass('fa fa-circle-o-notch fa-spin');
       if(data.video_1_data.document_tone){
         $('#container').empty();
         draw(data)
