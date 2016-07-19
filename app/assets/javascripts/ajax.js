@@ -33,8 +33,8 @@ function draw(data){
 function createIndividualVideoAnalysis(specificVideoData, videoNum) {
   var specificVideoContainer = $('<div>');
   var specificVideoHeading = $('<h2>');
-  specificVideoHeading.text('Video ' + videoNum);
-  specificVideoContainer.append(specificVideoHeading);
+  // specificVideoHeading.text('Video ' + videoNum);
+  // specificVideoContainer.append(specificVideoHeading);
   specificVideoContainer.addClass('specific-video-analysis');
   var toneCateogories = specificVideoData.document_tone.tone_categories;
   toneCateogories.forEach(function (toneCategory, index) {
@@ -42,9 +42,9 @@ function createIndividualVideoAnalysis(specificVideoData, videoNum) {
     toneCategoryContiner.addClass('main-category');
     var categoryNameClass = toneCategory.category_name.split(" ").join("-").toLowerCase();
     toneCategoryContiner.addClass(categoryNameClass);
-    var toneCategoryHeading = $('<h3>');
-    toneCategoryHeading.text(toneCategory.category_name);
-    toneCategoryContiner.append(toneCategoryHeading);
+    // var toneCategoryHeading = $('<h3>');
+    // toneCategoryHeading.text(toneCategory.category_name);
+    // toneCategoryContiner.append(toneCategoryHeading);
     specificVideoContainer.append(toneCategoryContiner);
     $('#container').append(specificVideoContainer);
     toneCategory.tones.forEach(function (tone, index2) {
