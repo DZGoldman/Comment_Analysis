@@ -1,4 +1,5 @@
 class Api < ActiveRecord::Base
+
   def self.get_comments (video_id)
     query = {
       :query => {
@@ -26,12 +27,6 @@ class Api < ActiveRecord::Base
     }
     return HTTParty.get('https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone/', query)
 
-  end
-
-  def self.get_sentiment (str)
-    AlchemyAPI.key = Rails.application.secrets.alchemy_api_key
-    results = AlchemyAPI.search(:sentiment_analysis, text: str)
-    return results
   end
 
 
@@ -69,5 +64,6 @@ class Api < ActiveRecord::Base
     print tone
     return stats.merge(tone)
   end
+
 
 end
