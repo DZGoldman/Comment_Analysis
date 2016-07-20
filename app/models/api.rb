@@ -7,7 +7,7 @@ class Api < ActiveRecord::Base
         :textFormat=> 'plainText',
         :part=> 'snippet',
         :videoId=> video_id,
-        :maxResults=> 50
+        :maxResults=> 100
       }
     }
     response = HTTParty.get('https://www.googleapis.com/youtube/v3/commentThreads', query)
@@ -22,7 +22,7 @@ class Api < ActiveRecord::Base
       },
       :query => {
         'version' => '2016-05-19',
-        'sentences'=> false
+        'sentences'=> true
       },
       :body => str,
       :headers => {
