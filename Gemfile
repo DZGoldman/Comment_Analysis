@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.6'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.15'
-
+gem 'pry'
 gem 'd3-rails'
 gem 'httparty'
 gem 'alchemy-api-rb', :require => 'alchemy_api'
