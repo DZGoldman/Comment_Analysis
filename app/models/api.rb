@@ -15,26 +15,23 @@ class Api < ActiveRecord::Base
   end
 
   def self.get_tone(str)
-      auth =  {
-        'username' =>Rails.application.secrets.tone_api_username,
-        'password' => Rails.application.secrets.tone_api_password
-      }
-
-      query = {
-        'body' => str,
+    options = {
+      :basic_auth => {
+        :username =>Rails.application.secrets.tone_api_username,
+        :password => Rails.application.secrets.tone_api_password,
+      },
+      :query => {
         'version' => '2016-05-19',
         'sentences'=> false
+      },
+      :body => str,
+      :headers => {
+        'Content-Type' => 'text/plain'
       }
-
-    headers = {
-      'Content-Type' => 'application/json'
     }
-    return HTTParty.post(
-    'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone/',
-    {:query => query,
-    :basic_auth => auth,
-    :headers => headers}
-    )
+
+    return HTTParty.post('https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone/',
+    options )
 
   end
 
@@ -69,7 +66,6 @@ class Api < ActiveRecord::Base
     str = Api.get_comments_as_string(comments)
     stats =  Api.get_stats(comments, str)
     puts 'bytttess:', str.bytesize
-    binding.pry
     tone = Api.get_tone(str)
     print tone
     return stats.merge(tone)
