@@ -13,3 +13,39 @@
  *= require_tree .
  *= require_self
  */
+
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css");
+@import 'https://fonts.googleapis.com/css?family=Bad+Script';
+
+ body {
+   font-family: sans-serif;
+ }
+
+.specific-video-analysis {
+  /*border: 1px solid black;*/
+  display: block;
+  margin: 0 auto;
+  /*padding: 5px;*/
+  text-align: center;
+}
+
+.main-category {
+  display: inline;
+}
+
+.sub-category {
+  /*border: 1px solid black;*/
+  display: inline-block;
+  width: 90px;
+  height: 90px;
+  font-size: 13px;
+}
+
+.blockquote {
+  color: grey;
+  text-align: center;
+  width: 50%;
+  margin: 0 auto;
+  font-size: 36px;
+  font-family: 'Bad Script', cursive;
+}
