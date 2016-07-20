@@ -17,7 +17,7 @@ class Api < ActiveRecord::Base
   def self.get_tone(str)
     options = {
       :basic_auth => {
-        :username =>Rails.application.secrets.tone_api_username,
+        :username => Rails.application.secrets.tone_api_username,
         :password => Rails.application.secrets.tone_api_password,
       },
       :query => {

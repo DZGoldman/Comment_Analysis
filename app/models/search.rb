@@ -2,7 +2,8 @@ class Search < ActiveRecord::Base
   def self.error_message_json message
     messages = {
       :url => 'Invalid url(s). Try again',
-      :youtube_api => 'Failed to get youtube comments.'
+      :youtube_api => 'Failed to get youtube comments.',
+      :watson_api => 'Failed to get tone data.'
     }
     return {
       :success? => false,
