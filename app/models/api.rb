@@ -11,7 +11,6 @@ class Api < ActiveRecord::Base
       }
     }
     response = HTTParty.get('https://www.googleapis.com/youtube/v3/commentThreads', query)
-    print(response.body)
     return JSON.parse(response.body)['items']
   end
 
