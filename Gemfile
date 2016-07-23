@@ -7,6 +7,7 @@ gem 'rails', '4.2.6'
 gem 'pg', '~> 0.15'
 gem 'pry'
 gem 'd3-rails'
+gem 'isotope-rails'
 gem 'httparty'
 gem 'alchemy-api-rb', :require => 'alchemy_api'
 # Use SCSS for stylesheets

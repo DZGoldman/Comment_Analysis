@@ -33,12 +33,18 @@
   display: inline;
 }
 
+#container1, #container2 {
+  margin: 0 auto;
+  text-align: center;
+  width: 94%;
+}
+
 .sub-category {
   /*border: 1px solid black;*/
   display: inline-block;
   width: 90px;
   height: 90px;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .blockquote {

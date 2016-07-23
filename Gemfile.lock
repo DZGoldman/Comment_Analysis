@@ -67,6 +67,9 @@ GEM
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
+    isotope-rails (2.2.2)
+      jquery-rails
+      rails (>= 4.0)
     jbuilder (2.5.0)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
@@ -171,6 +174,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   d3-rails
   httparty
+  isotope-rails
   jbuilder (~> 2.0)
   jquery-rails
   pg (~> 0.15)
